@@ -71,3 +71,6 @@ userSchema.methods.generatreTemporaryToken = async function () {
   const hashedToken = crypto.createHash('sha512').update(token).digest('hex');
   return { token, hashedToken };
 };
+
+const User = mongoose.model("user",userSchema)
+export {User}
