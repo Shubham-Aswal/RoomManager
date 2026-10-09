@@ -6,6 +6,11 @@
     "bcrypt": "^6.0.0",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.9.3"
+    "mongoose": "^9.9.3",
+    "nodemailer": "^10.0.15"
+  },
+  "allowScripts": {
+    "nodemailer@10.0.15": true,
+    "jsonwebtoken@9.0.3": true
   }
 }
