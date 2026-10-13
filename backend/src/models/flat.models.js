@@ -19,7 +19,7 @@ const flatSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'user',
       required: [true, 'Creator user ID is required'],
     },
   },
@@ -28,4 +28,6 @@ const flatSchema = new mongoose.Schema(
   },
 );
 
-export const Flat = mongoose.model('Flat', flatSchema);
+const Flat = mongoose.model('Flat', flatSchema);
+
+export { Flat };
