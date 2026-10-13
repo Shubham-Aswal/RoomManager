@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -9,19 +9,15 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
   avatar: {
-    type: url,
-    url: {
-      type: url,
-    },
-    default: {
-      type: url,
-      url: 'https://placehold.co/200x200',
-    },
+    type: String,
+    default: 'https://placehold.co/200x200',
   },
   email: {
     type: String,
     required: true,
     trim: true,
+    lowercase: true,
+    unique: true,
   },
   isVerified: {
     type: Boolean,
@@ -55,11 +51,10 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre('save', (next) => {
+userSchema.pre('save', async function () {
   if (this.isModified('password')) {
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
   }
-  next();
 });
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
@@ -72,5 +67,6 @@ userSchema.methods.generatreTemporaryToken = async function () {
   return { token, hashedToken };
 };
 
-const User = mongoose.model("user",userSchema)
-export {User}
+const User = mongoose.model('user', userSchema);
+
+export { User };
