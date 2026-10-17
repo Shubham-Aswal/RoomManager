@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import { AvailableUserRole } from '../utils/roles.utils.js';
 const flatMemberSchema = new mongoose.Schema(
   {
     flatId: {
@@ -17,7 +17,7 @@ const flatMemberSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: {
-        values: ['owner', 'admin', 'member'],
+        values: AvailableUserRole,
         message: '{VALUE} is not a valid member role',
       },
       default: 'member',
